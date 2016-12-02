@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://scenes/end.gd" type="Script" id=1]
+[ext_resource path="res://images/backgrounds/banner-1571872_1920.jpg" type="Texture" id=2]
+[ext_resource path="res://images/menu/End_(Script_MT_Bold).svg.png" type="Texture" id=3]
+[ext_resource path="res://fonts/bungee.fnt" type="BitmapFont" id=4]
+[ext_resource path="res://images/menu/Menu_principal_botonquit.png" type="Texture" id=5]
+
+[node name="Node2D" type="Node2D"]
+
+process/pause_mode = 2
+script/script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 398.003, 300.207 )
+transform/scale = Vector2( 0.414586, 0.997367 )
+texture = ExtResource( 2 )
+
+[node name="Sprite 2" type="Sprite" parent="."]
+
+transform/pos = Vector2( 408.865, 125.208 )
+texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 96.0
+margin/top = 224.0
+margin/right = 544.0
+margin/bottom = 320.0
+custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color = Color( 0.838732, 0.902344, 0.0881195, 1 )
+text = "Credits:\nMichael Bennet\nFernando Gimenez"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Button" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 306.0
+margin/top = 388.0
+margin/right = 518.0
+margin/bottom = 488.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+icon = ExtResource( 5 )
+flat = true
+
+[connection signal="pressed" from="Button" to="." method="_on_Button_pressed"]
+
+

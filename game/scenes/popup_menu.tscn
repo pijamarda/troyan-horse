@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://images/menu/Menu_principal_botonplay.png" type="Texture" id=1]
+[ext_resource path="res://images/menu/Menu_principal_botonquit.png" type="Texture" id=2]
+[ext_resource path="res://scenes/popup_menu.gd" type="Script" id=3]
+
+[node name="popupmenu" type="PopupMenu"]
+
+process/pause_mode = 2
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 32.0
+margin/top = 96.0
+margin/right = 544.0
+margin/bottom = 292.0
+popup/exclusive = false
+items = [ "", ExtResource( 1 ), false, false, false, -1, 0, null, "", false, "", ExtResource( 2 ), false, false, false, -1, 0, null, "", false ]
+script/script = ExtResource( 3 )
+
+[connection signal="item_pressed" from="." to="." method="_on_popupmenu_item_pressed"]
+
+

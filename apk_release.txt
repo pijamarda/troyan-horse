@@ -1,0 +1,4 @@
+alinear manualmente el APK
+/home/fgimenez/data/sdk/android-sdk-linux/build-tools/25.0.0/zipalign -v -p 4 ../release/ft-troyans.apk ../release/ft-troyans_aligned.apk
+firmar manualmente el apk
+/home/fgimenez/data/sdk/android-sdk-linux/build-tools/25.0.0/apksigner sign --ks ../../../keyPrivAndroid.asc ../release/ft-troyans_aligned.apk
