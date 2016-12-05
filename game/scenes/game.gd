@@ -7,12 +7,13 @@ var BOT_POSITION_Y = 480
 var PAUSE_TIME = 1
 var WAIT_INPUT = true
 var time_wait = 0.5
+var HORSE_SPEED_BASE = 3
 
 # VARIABLES
 
 var screen_size
 #	La velocidad del caballo ira aumentando segun capturemos ordenadores
-var horse_speed = 3
+var horse_speed = HORSE_SPEED_BASE
 var horse_direction = Vector2(horse_speed,0)
 #	horse_state indica hacia donde ha elegido el usuario moverse
 #	y donde esta el caballo actualmente
@@ -119,7 +120,6 @@ func _fixed_process(delta):
 	if get_node("map/horse/kinematic_horse").is_colliding():
 		var collision_object = get_node("map/horse/kinematic_horse").get_collider()
 		var collision_name = collision_object.get_name()
-		print(collision_name)
 		if (collision_name == "firewall" or collision_name == "infected" or collision_name == "cable"):
 			get_node("SamplePlayer").play("grito")
 			print("Mueres")
@@ -131,9 +131,9 @@ func _fixed_process(delta):
 			horse_moving = false
 			horse_direction = Vector2(horse_speed,0)
 		elif (collision_name == "computer"):
-			print("Capturas computer")
 			if (time_left < 0 ):
 				computers_remaining = computers_remaining - 1
+				horse_speed = horse_speed + 1
 				var pos_collider = collision_object.get_global_pos()
 				print(pos_collider)
 				collision_object.get_parent().free()
@@ -195,6 +195,7 @@ func _fixed_process(delta):
 			get_node("/root/main").add_child(end)
 		else:
 			computers_remaining = 3
+			
 			nivel = nivel + 1
 			get_node("map/horse").free()
 			get_node("map").free()
@@ -204,3 +205,5 @@ func _fixed_process(delta):
 			var scene = load("res://scenes/horse.tscn")
 			var horse = scene.instance()
 			get_node("map").add_child(horse)
+			horse_speed = HORSE_SPEED_BASE
+			horse_direction = Vector2(horse_speed,0)
