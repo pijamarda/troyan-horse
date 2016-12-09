@@ -44,6 +44,9 @@ var nivel = 1
 
 func _ready():
 
+	# Voy a borrar del todo el MENU PRINCIPAL puesto que hay un BUG
+	# que permite activarlo aun cuando el juego esta funcionando
+	get_node("/root/main/menu").queue_free()
 	#	Quizas nos sea util en el futuro saber el tamaño de la pantalla
 	screen_size = get_viewport_rect().size
 	#set_process_input(true)

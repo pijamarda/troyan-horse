@@ -9,8 +9,9 @@ func _ready():
 	get_node(".").add_child(splash_title)
 	
 func run():
-	var splash_node = get_node("splash_title")
-	splash_node.queue_free()
+	# Elimino para que no ocupe memoria el splash title
+	get_node("splash_title").queue_free()
+	
 	var menu_scene = load("res://scenes/menu_control.tscn")
 	var menu = menu_scene.instance()
 	get_node(".").add_child(menu)
