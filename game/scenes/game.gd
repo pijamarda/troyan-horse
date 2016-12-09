@@ -70,40 +70,41 @@ func _input(event):
 	#	vamos a cambiarlo para que sea pulsando encima o debajo del caballo
 	var temp_horse_pos = get_node("/root/main/game/map/horse/kinematic_horse").get_global_pos()
 	#	Hemos definido la accion horse_up en el INPUT del proyecto
-	if((event.is_action("horse_up") and event.is_pressed() and !event.is_echo()) or (event.type == InputEvent.MOUSE_BUTTON and event.pos.y < temp_horse_pos.y)):
-		#	Primero vamos a comprobar si el caballo no esta en una transicion de movimiento
-		if (not horse_moving):
-			get_node("SamplePlayer").play("change_lane_1")
-			#	Si no se esta moviendo vamos a ver en cual de los cables se encuentra
-			if (horse_state == 0):	# esta en el medio
-				#	Si esta en el medio se puede mover hacia arriba
-				horse_direction = Vector2(horse_speed,-horse_speed)
-				horse_state = -1
-				horse_moving = true
-			elif (horse_state == 1):	# Esta abajo
-				#	Entonces se puede mover hacia el medio
-				horse_direction = Vector2(horse_speed,-horse_speed)
-				horse_state = 0
-				horse_moving = true
-				#	Como se mueve hacia el medio, hay que notificar en que direccion
-				#	esto lo hacemos con la variable "bajando" indicando que esta subiendo
-				bajando = false
-	#	TODO: Hay que ajustar la zona de pulsacion del caballo, es posible que la posicion devuelta
-	#	sea la esuina superior izquierda
-	if(event.is_action("horse_down") and event.is_pressed() and !event.is_echo() or (event.type == InputEvent.MOUSE_BUTTON and event.pos.y > temp_horse_pos.y)):
-		if (not horse_moving):
-			get_node("SamplePlayer").play("change_lane_1")
-			if (horse_state == -1):
-				horse_direction = Vector2(horse_speed,horse_speed)
-				horse_state = 0
-				horse_moving = true
-				bajando = true
-			elif (horse_state == 0):
-				horse_state = 1
-				horse_direction = Vector2(horse_speed,horse_speed)
-				horse_moving = true
-
-	#	Menu popup de Pausa
+	if (not horse_moving):
+		if((event.is_action("horse_up") and event.is_pressed() and !event.is_echo()) or (event.type == InputEvent.MOUSE_BUTTON and event.pos.y < temp_horse_pos.y)):
+			#	Primero vamos a comprobar si el caballo no esta en una transicion de movimiento
+			#if (not horse_moving):
+				get_node("SamplePlayer").play("change_lane_1")
+				#	Si no se esta moviendo vamos a ver en cual de los cables se encuentra
+				if (horse_state == 0):	# esta en el medio
+					#	Si esta en el medio se puede mover hacia arriba
+					horse_direction = Vector2(horse_speed,-horse_speed)
+					horse_state = -1
+					horse_moving = true
+				elif (horse_state == 1):	# Esta abajo
+					#	Entonces se puede mover hacia el medio
+					horse_direction = Vector2(horse_speed,-horse_speed)
+					horse_state = 0
+					horse_moving = true
+					#	Como se mueve hacia el medio, hay que notificar en que direccion
+					#	esto lo hacemos con la variable "bajando" indicando que esta subiendo
+					bajando = false
+		#	TODO: Hay que ajustar la zona de pulsacion del caballo, es posible que la posicion devuelta
+		#	sea la esuina superior izquierda
+		elif(event.is_action("horse_down") and event.is_pressed() and !event.is_echo() or (event.type == InputEvent.MOUSE_BUTTON and event.pos.y > temp_horse_pos.y)):
+			#if (not horse_moving):
+				get_node("SamplePlayer").play("change_lane_1")
+				if (horse_state == -1):
+					horse_direction = Vector2(horse_speed,horse_speed)
+					horse_state = 0
+					horse_moving = true
+					bajando = true
+				elif (horse_state == 0):
+					horse_state = 1
+					horse_direction = Vector2(horse_speed,horse_speed)
+					horse_moving = true
+	
+		#	Menu popup de Pausa
 	if(event.is_action("escape") and event.is_pressed() and !event.is_echo()):
 		
 		# como el caballo esta en el centro vamos a colocar el 
@@ -203,7 +204,6 @@ func _fixed_process(delta):
 			get_node("/root/main").add_child(end)
 		else:
 			computers_remaining = 3
-			
 			nivel = nivel + 1
 			get_node("map/horse").free()
 			get_node("map").free()

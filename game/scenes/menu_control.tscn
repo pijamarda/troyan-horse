@@ -62,7 +62,11 @@ icon = ExtResource( 4 )
 flat = true
 items = [  ]
 
+[connection signal="mouse_enter" from="start_button" to="." method="_on_start_button_mouse_enter"]
+
 [connection signal="pressed" from="start_button" to="." method="_on_start_button_pressed"]
+
+[connection signal="mouse_enter" from="quit_button" to="." method="_on_quit_button_mouse_enter"]
 
 [connection signal="pressed" from="quit_button" to="." method="_on_quit_button_pressed"]
 
