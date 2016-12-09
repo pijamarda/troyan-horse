@@ -37,6 +37,8 @@ var time_left = PAUSE_TIME
 #	moviendo, es en direccion arriba o abajo
 var bajando = false
 
+var playCapture = true
+
 #
 var nivel = 1
 
@@ -71,6 +73,7 @@ func _input(event):
 	if((event.is_action("horse_up") and event.is_pressed() and !event.is_echo()) or (event.type == InputEvent.MOUSE_BUTTON and event.pos.y < temp_horse_pos.y)):
 		#	Primero vamos a comprobar si el caballo no esta en una transicion de movimiento
 		if (not horse_moving):
+			get_node("SamplePlayer").play("change_lane_1")
 			#	Si no se esta moviendo vamos a ver en cual de los cables se encuentra
 			if (horse_state == 0):	# esta en el medio
 				#	Si esta en el medio se puede mover hacia arriba
@@ -89,6 +92,7 @@ func _input(event):
 	#	sea la esuina superior izquierda
 	if(event.is_action("horse_down") and event.is_pressed() and !event.is_echo() or (event.type == InputEvent.MOUSE_BUTTON and event.pos.y > temp_horse_pos.y)):
 		if (not horse_moving):
+			get_node("SamplePlayer").play("change_lane_1")
 			if (horse_state == -1):
 				horse_direction = Vector2(horse_speed,horse_speed)
 				horse_state = 0
@@ -121,7 +125,7 @@ func _fixed_process(delta):
 		var collision_object = get_node("map/horse/kinematic_horse").get_collider()
 		var collision_name = collision_object.get_name()
 		if (collision_name == "firewall" or collision_name == "infected" or collision_name == "cable"):
-			get_node("SamplePlayer").play("grito")
+			get_node("SamplePlayer").play("death_fw_sound_1")
 			print("Mueres")
 			get_node("map/horse").free()
 			var scene = load("res://scenes/horse.tscn")
@@ -131,6 +135,9 @@ func _fixed_process(delta):
 			horse_moving = false
 			horse_direction = Vector2(horse_speed,0)
 		elif (collision_name == "computer"):
+			if playCapture:
+				playCapture = false
+				get_node("SamplePlayer").play("capture_sound_1")
 			if (time_left < 0 ):
 				computers_remaining = computers_remaining - 1
 				horse_speed = horse_speed + 1
@@ -149,6 +156,7 @@ func _fixed_process(delta):
 				horse_moving = false
 				horse_direction = Vector2(horse_speed,0)
 				time_left = PAUSE_TIME
+				playCapture = true
 			else:
 				#print(time_left)
 				time_left = time_left - delta

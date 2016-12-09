@@ -1,11 +1,17 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://scenes/game.gd" type="Script" id=1]
-[ext_resource path="res://sounds/grito.smp" type="Sample" id=2]
+[ext_resource path="res://sounds/capture_sound_1.smp" type="Sample" id=2]
+[ext_resource path="res://sounds/change_lane_1.smp" type="Sample" id=3]
+[ext_resource path="res://sounds/death_fw_sound_1.smp" type="Sample" id=4]
+[ext_resource path="res://sounds/grito.smp" type="Sample" id=5]
 
 [sub_resource type="SampleLibrary" id=1]
 
-samples/grito = { "db":0.0, "pitch":1.0, "sample":ExtResource( 2 ) }
+samples/capture_sound_1 = { "db":0.0, "pitch":3.34, "sample":ExtResource( 2 ) }
+samples/change_lane_1 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 3 ) }
+samples/death_fw_sound_1 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 4 ) }
+samples/grito = { "db":0.0, "pitch":1.0, "sample":ExtResource( 5 ) }
 
 [node name="game" type="Node2D"]
 
