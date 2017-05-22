@@ -26,6 +26,9 @@ var horse_state = 0 # -1 means top, 0 mid, 1 bottom
 #	ser TRUE y no se admiten cambios de direccion
 var horse_moving = false
 
+#
+var horse_scene
+
 #	Al prinipio tenemos 3 computadoras, segun vamos capturando
 #	vamos cambiando la variable
 var computers_remaining = 3
@@ -58,7 +61,7 @@ func _ready():
 	get_node(".").add_child(map)
 	#	Instanciamos el caballo que vamos a manejar
 	#	y lo attachamos a la escena MAP
-	var horse_scene = load("res://scenes/horse.tscn")
+	horse_scene = load("res://scenes/horse.tscn")
 	var horse = horse_scene.instance()
 	get_node("map").add_child(horse)
 	#	Instanciamos el popup_menu de la pausa
@@ -131,9 +134,8 @@ func _fixed_process(delta):
 		if (collision_name == "firewall" or collision_name == "infected" or collision_name == "cable"):
 			get_node("SamplePlayer").play("death_fw_sound_1")
 			print("Mueres")
-			get_node("map/horse").free()
-			var scene = load("res://scenes/horse.tscn")
-			var horse = scene.instance()
+			get_node("map/horse").free()			
+			var horse = horse_scene.instance()
 			get_node("map").add_child(horse)
 			horse_state = 0
 			horse_moving = false
@@ -153,8 +155,8 @@ func _fixed_process(delta):
 				infected.set_global_pos(pos_collider)
 				get_node("map").add_child(infected)
 				get_node("map/horse").free()
-				var scene = load("res://scenes/horse.tscn")
-				var horse = scene.instance()
+				#var scene = load("res://scenes/horse.tscn")
+				var horse = horse_scene.instance()
 				get_node("map").add_child(horse)
 				horse_state = 0
 				horse_moving = false

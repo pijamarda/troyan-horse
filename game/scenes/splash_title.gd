@@ -9,6 +9,7 @@ func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 	set_process(true)
+	get_node("label_version").set_text(Globals.get(version_number))
 	pass
 
 func _process(delta):
