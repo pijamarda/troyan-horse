@@ -7,18 +7,8 @@
 
 [sub_resource type="SampleLibrary" id=1]
 
-samples/menu_1 = {
-"db": 0.0,
-"pitch": 1.0,
-"priority": 0,
-"sample": ExtResource( 2 )
-}
-samples/menu_hover_1 = {
-"db": 0.0,
-"pitch": 1.0,
-"priority": 0,
-"sample": ExtResource( 3 )
-}
+samples/menu_1 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 2 ) }
+samples/menu_hover_1 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 3 ) }
 
 [node name="main" type="Node"]
 

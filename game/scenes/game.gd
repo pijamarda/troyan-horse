@@ -28,6 +28,7 @@ var horse_moving = false
 
 #
 var horse_scene
+var infected_res_scene = load("res://scenes/infected.tscn")
 
 #	Al prinipio tenemos 3 computadoras, segun vamos capturando
 #	vamos cambiando la variable
@@ -69,6 +70,7 @@ func _ready():
 	var popup_menu_scene = load("res://scenes/popup_menu.tscn")
 	var popup_menu = popup_menu_scene.instance()
 	get_node(".").add_child(popup_menu)
+	infected_res_scene = load("res://scenes/infected.tscn")
 	
 func _input(event):
 	
@@ -150,8 +152,8 @@ func _fixed_process(delta):
 				var pos_collider = collision_object.get_global_pos()
 				print(pos_collider)
 				collision_object.get_parent().free()
-				var infected_res = load("res://scenes/infected.tscn")
-				var infected = infected_res.instance()
+				#var infected_res = load("res://scenes/infected.tscn")
+				var infected = infected_res_scene.instance()
 				infected.set_global_pos(pos_collider)
 				get_node("map").add_child(infected)
 				get_node("map/horse").free()
@@ -214,8 +216,7 @@ func _fixed_process(delta):
 			get_node("map").free()
 			var scene_map = load("res://scenes/levels/level_1_2.tscn")
 			var map = scene_map.instance()
-			get_node(".").add_child(map)
-			var scene = load("res://scenes/horse.tscn")
+			get_node(".").add_child(map)			
 			var horse = scene.instance()
 			get_node("map").add_child(horse)
 			horse_speed = HORSE_SPEED_BASE
