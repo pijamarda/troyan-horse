@@ -46,6 +46,9 @@ var playCapture = true
 #
 var nivel = 1
 
+#
+var number_deaths = 0
+
 func _ready():
 
 	# Voy a borrar del todo el MENU PRINCIPAL puesto que hay un BUG
@@ -71,6 +74,7 @@ func _ready():
 	var popup_menu = popup_menu_scene.instance()
 	get_node(".").add_child(popup_menu)
 	infected_res_scene = load("res://scenes/infected.tscn")
+	
 	
 func _input(event):
 	
@@ -136,6 +140,7 @@ func _fixed_process(delta):
 		if (collision_name == "firewall" or collision_name == "infected" or collision_name == "cable"):
 			get_node("SamplePlayer").play("death_fw_sound_1")
 			print("Mueres")
+			number_deaths = number_deaths + 1
 			get_node("map/horse").free()			
 			var horse = horse_scene.instance()
 			get_node("map").add_child(horse)
@@ -201,6 +206,7 @@ func _fixed_process(delta):
 		
 		#TODO
 		get_node("map/horse/kinematic_horse").move(horse_direction)
+	get_node("CanvasLayer/hud/label_number_deaths").set_text(String(number_deaths))
 	if (computers_remaining == 0):
 		if nivel == 2:
 			get_tree().set_pause(true)
@@ -216,8 +222,8 @@ func _fixed_process(delta):
 			get_node("map").free()
 			var scene_map = load("res://scenes/levels/level_1_2.tscn")
 			var map = scene_map.instance()
-			get_node(".").add_child(map)			
-			var horse = scene.instance()
+			get_node(".").add_child(map)
+			var horse = horse_scene.instance()
 			get_node("map").add_child(horse)
 			horse_speed = HORSE_SPEED_BASE
 			horse_direction = Vector2(horse_speed,0)
