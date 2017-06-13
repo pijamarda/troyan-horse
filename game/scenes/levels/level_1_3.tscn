@@ -6,7 +6,6 @@
 [ext_resource path="res://images/firewalls/Firewall_96x128.png" type="Texture" id=4]
 [ext_resource path="res://images/computers/Comp.png" type="Texture" id=5]
 
-
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0

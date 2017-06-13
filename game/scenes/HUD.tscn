@@ -1,6 +1,32 @@
-[gd_scene load_steps=2 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://fonts/bungee.fnt" type="BitmapFont" id=1]
+[ext_resource path="res://images/menu/Directional_Arrow_Up.png" type="Texture" id=2]
+[ext_resource path="res://images/menu/Directional_Arrow_Down.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+
+resource/name = "arrow_up"
+length = 2.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Directional_Arrow_Down:transform/pos")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 1, 2 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ Vector2( 670, 470 ), Vector2( 670, 400 ), Vector2( 670, 470 ) ] }
+
+[sub_resource type="Animation" id=2]
+
+resource/name = "arrow_down"
+length = 2.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Directional_Arrow_Up:transform/pos")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 1, 2 ), "transitions":FloatArray( 1, 1, 1 ), "update":0, "values":[ Vector2( 670, 110 ), Vector2( 670, 180 ), Vector2( 670, 110 ) ] }
 
 [node name="hud" type="Node2D"]
 
@@ -35,5 +61,39 @@ text = "0"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="Directional_Arrow_Up" type="Sprite" parent="."]
+
+transform/pos = Vector2( 670, 110 )
+transform/scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
+
+[node name="Directional_Arrow_Down" type="Sprite" parent="."]
+
+transform/pos = Vector2( 670, 470 )
+transform/scale = Vector2( 3, 3 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/arrow_up = SubResource( 1 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "arrow_up"
+
+[node name="AnimationPlayer1" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/arrow_down = SubResource( 2 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "arrow_down"
 
 
