@@ -151,6 +151,7 @@ func _fixed_process(delta):
 			if playCapture:
 				playCapture = false
 				get_node("SamplePlayer").play("capture_sound_1")
+				collision_object.get_parent().get_node("AnimationPlayer").play("rotate")
 			if (time_left < 0 ):
 				computers_remaining = computers_remaining - 1
 				horse_speed = horse_speed + 1
